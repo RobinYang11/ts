@@ -4,7 +4,8 @@
   "description": "ts",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "prod": "webpack --config ./config/webpack.prod.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -20,19 +21,24 @@
   },
   "homepage": "https://github.com/RobinYang11/ts#readme",
   "devDependencies": {
+    "babel-loader": "^7.1.5",
+    "bable-loader": "0.0.1-security",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.4",
     "sass-loader": "^7.1.0",
     "scss": "^0.2.4",
+    "scss-loader": "0.0.1",
     "style-loader": "^0.23.1",
     "typescript": "^3.1.3",
     "url-loader": "^1.1.2",
     "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"

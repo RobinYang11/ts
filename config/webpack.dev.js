@@ -9,7 +9,7 @@ const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 
-module.exports = merge(common, {
+var config= merge(common, {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: '../dist', 
@@ -17,7 +17,6 @@ module.exports = merge(common, {
         port:port
     },
     plugins: [
-        
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new CleanWebpackPlugin(['dist']),        
@@ -38,3 +37,9 @@ module.exports = merge(common, {
         }),
     ]
 });
+
+module.exports =config;
+
+
+
+

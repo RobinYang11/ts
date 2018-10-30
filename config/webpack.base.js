@@ -1,17 +1,18 @@
 const path = require('path');
+const fs = require('fs');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-module.exports = {
-    entry: {
-        app: './src/app.js'
-    },
+const conf = require('./conf');
+var config = {
+    entry: conf.getEntries(conf.pageDir),
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, '../dist')
     },
+  
     module: {
-        rules: [{
+        rules: [ {
                 test: /\.(html)$/,
                 use: {
                     loader: 'html-loader',
@@ -21,18 +22,12 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
+                test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
-                })
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
+                    use: ['css-loader']
+                }),
+                exclude: /node_modules/
             },
             {
                 test: /\.(gif|jpg|jpeg|png|svg)$/,
@@ -52,9 +47,15 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({
-            title: 'dev'
-        }),
-        new ExtractTextPlugin("styles.css"),
+        new ExtractTextPlugin("[name].css"),
     ],
 };
+fs.readdirSync(conf.pageDir).forEach(i => {
+    console.log(i)
+    config.plugins.push(new HtmlWebpackPlugin({
+        filename: i + '.html',
+        title: i,
+        template: "./src/pages/" + i + "/index.html"
+    }), )
+})
+module.exports = config
